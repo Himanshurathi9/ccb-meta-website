@@ -1,7 +1,8 @@
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'motion/react';
 import { useState } from 'react';
-import { Menu, X, Coffee } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
+import Logo from './Logo';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,28 +27,20 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300 flex items-center justify-center",
         isScrolled ? "mt-0 px-6 backdrop-blur-md" : "mt-0"
       )}
     >
       <div 
         className={cn(
-          "mx-auto flex max-w-7xl items-center justify-between px-6 py-3 transition-all duration-500 rounded-2xl",
+          "mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3 transition-all duration-500 rounded-2xl overflow-hidden max-h-[60px]",
           isScrolled 
             ? "glass-morphism shadow-2xl shadow-ccb-rich-red/10" 
             : "bg-transparent border border-transparent"
         )}
       >
-        <div className="flex items-center gap-2">
-          <motion.div
-            whileHover={{ rotate: 15, scale: 1.1 }}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-ccb-rich-red text-white glow-red-premium shadow-lg"
-          >
-            <Coffee size={24} />
-          </motion.div>
-          <span className="font-display text-xl font-bold tracking-tight text-white">
-            CCB<span className="text-ccb-rich-red">.</span>
-          </span>
+        <div className="flex items-center gap-[10px]">
+          <Logo mobileHeight="32px" desktopHeight="40px" />
         </div>
 
         {/* Desktop Links */}

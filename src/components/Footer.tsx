@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
-import { Coffee, Instagram, Twitter, Facebook, ArrowUp } from 'lucide-react';
+import { Instagram, Twitter, Facebook, ArrowUp } from 'lucide-react';
+import Logo from './Logo';
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -13,14 +14,12 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20 pb-12">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-4 lg:gap-8">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-ccb-rich-red text-white glow-red-premium">
-                <Coffee size={24} />
-              </div>
-              <span className="font-display text-2xl font-bold tracking-tight text-white">
-                CCB<span className="text-ccb-rich-red">.</span>
-              </span>
-            </div>
+            <Logo 
+              showText={false} 
+              mobileHeight="40px" 
+              desktopHeight="50px"
+              imgClassName="mb-[10px]"
+            />
             <p className="mt-8 max-w-md text-lg text-white/50 leading-relaxed">
               More than a cafe. A complete dining experience. 
               Authentic flavors, architectural ambiance, and world-class service.
