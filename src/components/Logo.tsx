@@ -1,4 +1,6 @@
+// src/components/Logo.tsx
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/src/lib/utils';
 
@@ -17,9 +19,9 @@ export default function Logo({
   desktopHeight = "40px",
   showText = false 
 }: LogoProps) {
-  // Use a timestamp to force refresh on load/mount
-  const [version] = useState(Date.now());
-  const logoSrc = `/logo/ccb.png?v=${version}`;
+  const [imgError, setImgError] = useState(false);
+
+  const logoSrc = `/images/Logo/ccb.png`;
 
   return (
     <div className={cn("flex items-center gap-3", className)}>
@@ -29,19 +31,31 @@ export default function Logo({
         transition={{ duration: 0.8 }}
         className="flex items-center flex-shrink-0"
       >
-        <img
-          src={logoSrc}
-          alt="CCB Logo"
-          className={cn(
-            "w-auto object-contain transition-all duration-300 h-[var(--h-mobile)] md:h-[var(--h-desktop)]",
-            imgClassName
-          )}
-          style={{ 
-            "--h-mobile": mobileHeight, 
-            "--h-desktop": desktopHeight 
-          } as any}
-          referrerPolicy="no-referrer"
-        />
+        {!imgError ? (
+          <img
+            src={logoSrc}
+            alt="CCB Logo"
+            onError={() => setImgError(true)}
+            className={cn(
+              "w-auto object-contain transition-all duration-300 h-[var(--h-mobile)] md:h-[var(--h-desktop)]",
+              imgClassName
+            )}
+            style={{ 
+              "--h-mobile": mobileHeight, 
+              "--h-desktop": desktopHeight 
+            } as CSSProperties}
+          />
+        ) : (
+          <span
+            className={cn(
+              "font-display font-black tracking-tighter text-white",
+              imgClassName
+            )}
+            style={{ fontSize: desktopHeight }}
+          >
+            CCB<span className="text-ccb-rich-red">.</span>
+          </span>
+        )}
       </motion.div>
       
       {showText && (
